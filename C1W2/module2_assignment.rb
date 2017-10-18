@@ -23,6 +23,7 @@ class LineAnalyzer
     @highest_wf_count = 0
     @content = con
     @line_number = lno 
+    calculate_word_frequency
   end
 
   #Implement the calculate_word_frequency() method to:
@@ -73,8 +74,6 @@ class Solution
 
   def initialize 
     @analyzers = []
-    @highest_count_words_across_lines = []
-    @highest_count_across_lines = 0
   end
 
   def analyze_file
@@ -94,8 +93,9 @@ class Solution
   #  attribute value determined previously and stores them in highest_count_words_across_lines.
 
   def calculate_line_with_highest_frequency
+    @highest_count_words_across_lines = []
+    @highest_count_across_lines = 0
     @analyzers.each do |anal|
-      anal.calculate_word_frequency
       @highest_count_across_lines = anal.highest_wf_count if anal.highest_wf_count > @highest_count_across_lines
     end
     @highest_count_words_across_lines = @analyzers.select {|anal| @highest_count_across_lines == anal.highest_wf_count}
